@@ -123,13 +123,6 @@ class PowerFileViewModel {
       return PowerViewType.fileFail;
     }
 
-    int? size = await DownloadUtil.fileSize(downloadUrl!, cancelToken: cancelToken);
-    if (size == null) {
-      powerPrint("get file size error");
-      return PowerViewType.fileFail;
-    }
-
-    powerPrint("download file size: ${FileUtil.fileSize(size)}");
     DownloadUtil.download(downloadUrl!, filePath, cancelToken: cancelToken, onProgress: (count, total) {
       final value = (count.toDouble() / total.toDouble() * 100).toInt();
       if (_viewType == PowerViewType.fileLoading) {

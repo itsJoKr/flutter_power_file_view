@@ -9,8 +9,6 @@ import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 
-import com.tencent.smtt.sdk.TbsReaderView;
-
 import java.io.File;
 import java.util.Map;
 
@@ -22,7 +20,6 @@ import io.flutter.plugin.platform.PlatformView;
 public class PowerFileView implements PlatformView {
 
     private MethodChannel channel;
-    private TbsReaderView readerView;
     private final FrameLayout frameLayout;
     private final String tempPath;
     private final String filePath;
@@ -45,14 +42,7 @@ public class PowerFileView implements PlatformView {
         tempPath = context.getCacheDir().toString() + File.separator + "TbsReaderTemp";
         // The Context here requires Activity  这里的Context需要Activity
         frameLayout = new FrameLayout(context);
-        readerView = new TbsReaderView(context, new TbsReaderView.ReaderCallback() {
-            @Override
-            public void onCallBackAction(Integer integer, Object o, Object o1) {
-            }
-        });
         frameLayout.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        readerView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        frameLayout.addView(readerView);
         filePath = (String) params.get("filePath");
         openFile();
     }
@@ -71,13 +61,12 @@ public class PowerFileView implements PlatformView {
             Bundle localBundle = new Bundle();
             localBundle.putString("filePath", filePath);
             localBundle.putString("tempPath", tempPath);
-            readerView.openFile(localBundle);
         }
 
     }
 
     private boolean isSupportFile(String filePath) {
-        return readerView.preOpen(getFileType(filePath), false);
+        return false;
     }
 
     private String getFileType(String filePath) {
@@ -97,15 +86,6 @@ public class PowerFileView implements PlatformView {
     }
 
     private void refresh(Context context) {
-        frameLayout.removeView(readerView);
-        readerView.onStop();
-        readerView = null;
-        readerView = new TbsReaderView(context, new TbsReaderView.ReaderCallback() {
-            @Override
-            public void onCallBackAction(Integer integer, Object o, Object o1) {
-            }
-        });
-        frameLayout.addView(readerView);
         openFile();
         frameLayout.requestLayout();
     }
@@ -117,7 +97,6 @@ public class PowerFileView implements PlatformView {
 
     @Override
     public void dispose() {
-        readerView.onStop();
         channel.setMethodCallHandler(null);
     }
 }

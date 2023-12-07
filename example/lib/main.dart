@@ -40,7 +40,7 @@ const List<String> files = [
   "https://google-developer-training.github.io/android-developer-fundamentals-course-concepts/en/android-developer-fundamentals-course-concepts-en.pdf",
   "http://www.cztouch.com/upfiles/soft/testpdf.pdf",
   "http://blog.java1234.com/cizhi20211008.docx",
-  "http://blog.java1234.com/moban20211008.xls"
+  "https://filesamples.com/samples/document/xlsx/sample2.xlsx",
 ];
 
 class HomePage extends StatelessWidget {

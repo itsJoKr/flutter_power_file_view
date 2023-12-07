@@ -1,5 +1,11 @@
 # PowerFileView
 
+# FORK:
+
+Forked of PowerFileView. 
+- updated dio
+- removed Android part
+
 [![pub package](https://img.shields.io/pub/v/power_file_view.svg)](https://pub.dartlang.org/packages/power_file_view)
 
 English | [简体中文](./README.zh-CN.md)
