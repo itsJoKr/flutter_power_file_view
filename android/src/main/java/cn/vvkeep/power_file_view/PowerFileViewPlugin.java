@@ -42,7 +42,6 @@ public class PowerFileViewPlugin implements FlutterPlugin, ActivityAware {
     @Override
     public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
         LogUtils.e("onDetachedFromEngine");
-        channel.setMethodCallHandler(null);
         if (mReceiver != null && context != null) {
             context.unregisterReceiver(mReceiver);
         }
