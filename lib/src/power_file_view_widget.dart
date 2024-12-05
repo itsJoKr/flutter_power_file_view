@@ -84,7 +84,7 @@ class _PowerFileViewWidgetState extends State<PowerFileViewWidget> {
   Widget build(BuildContext context) {
     return OrientationBuilder(
       builder: (BuildContext context, Orientation orientation) {
-        _channel?.invokeMethod('refreshView');
+        // _channel?.invokeMethod('refreshView');
         return _buildPowerFileWidget();
       },
     );
