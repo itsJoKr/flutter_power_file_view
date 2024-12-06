@@ -62,7 +62,9 @@ class _PowerFileViewWidgetState extends State<PowerFileViewWidget> {
         updatePowerViewType(type: type);
       },
       progressChanged: (progress) {
-        setState(() {});
+        if (this.mounted) {
+            setState(() {});
+        }
       },
     );
 
@@ -71,7 +73,9 @@ class _PowerFileViewWidgetState extends State<PowerFileViewWidget> {
 
   void updatePowerViewType({PowerViewType? type}) async {
     await _viewModel.updateViewType();
-    setState(() {});
+    if (this.mounted) {
+      setState(() {});
+    }
   }
 
   @override
@@ -82,12 +86,13 @@ class _PowerFileViewWidgetState extends State<PowerFileViewWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return OrientationBuilder(
-      builder: (BuildContext context, Orientation orientation) {
-        _channel?.invokeMethod('refreshView');
-        return _buildPowerFileWidget();
-      },
-    );
+    return _buildPowerFileWidget();
+    // return OrientationBuilder(
+    //   builder: (BuildContext context, Orientation orientation) {
+    //     _channel?.invokeMethod('refreshView');
+    //     return _buildPowerFileWidget();
+    //   },
+    // );
   }
 
   Widget _buildPowerFileWidget() {

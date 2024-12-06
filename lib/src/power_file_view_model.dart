@@ -131,6 +131,7 @@ class PowerFileViewModel {
     }, callback: (state) {
       if (state == DownloadState.error || state == DownloadState.fail) {
         viewTypeChanged(PowerViewType.fileFail);
+        downloadUrl = null;
       } else if (state == DownloadState.done) {
         _isLocalExists = true;
         viewTypeChanged(PowerViewType.done);
